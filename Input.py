@@ -23,6 +23,7 @@ def main():
     while True:
         PressKey(W)
         screen =  np.array(ImageGrab.grab(bbox=(0,40,800,640)))
+        print('{} Frames per second'.format(1/(time.time()-last_time)))
         #print('Frame took {} seconds'.format(time.time()-last_time))
         last_time = time.time()
         new_screen = process_img(screen)
