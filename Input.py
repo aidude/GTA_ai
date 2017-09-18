@@ -1,3 +1,4 @@
+import math
 import numpy as np
 from PIL import ImageGrab
 import cv2
@@ -13,6 +14,9 @@ def process_img(image):
     processed_img =  cv2.Canny(processed_img, threshold1 = 200, threshold2=300)
     return processed_img
 
+
+# def roi(processed_img):
+#     return roi_image
 def main():
     
     for i in list(range(4))[::-1]:
@@ -21,7 +25,7 @@ def main():
 
     last_time = time.time()
     while True:
-        PressKey(W)
+        # PressKey(W)
         screen =  np.array(ImageGrab.grab(bbox=(0,40,800,640)))
         print('{} Frames per second'.format(1/(time.time()-last_time)))
         #print('Frame took {} seconds'.format(time.time()-last_time))
@@ -32,3 +36,6 @@ def main():
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
+
+if __name__ == '__main__':
+    main()
