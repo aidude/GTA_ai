@@ -19,17 +19,18 @@ def draw_lines(img, lines):
             coords = line[0]
             cv2.line(img, (coords[0],coords[1]), (coords[2],coords[3]), [255,255,255], 3)
     except:
-pass
+        pass
 
 def process_img(image):
     original_image = image
     # convert to gray
     processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # edge detection
-    processed_image =  cv2.Canny(processed_image, threshold1 = 200, threshold2=300)
-
+    processed_image = cv2.Canny(processed_image, threshold1 = 200, threshold2=300)
+    # Guassian Blur
+    processed_image = cv2.GaussianBlur(processed_image, (5,5), 0)
     # Hough lines 
-    lines = cv2.HoughLinesP(processed_image, numpy.pi/180, 180, 20, 50)
+    lines = cv2.HoughLinesP(processed_image, np.pi/180, 180, 20, 0)
     draw_lines(processed_image, lines)
     return processed_image
 
