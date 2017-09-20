@@ -1,3 +1,6 @@
+# GTA 5 AI Project
+# Cloned from sendtex repo for pygta
+
 import ctypes
 import time
 

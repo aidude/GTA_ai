@@ -1,3 +1,8 @@
+# GTA 5 AI Project
+# @author = amritansh
+
+
+
 import math
 import numpy as np
 from PIL import ImageGrab
@@ -15,8 +20,13 @@ def process_img(image):
     return processed_img
 
 
-# def roi(processed_img):
-#     return roi_image
+def roi(image, vertices):
+    mask = np.zeroes_like(image)
+    cv2.fillPoly(mask, vertices, 255)
+    masked_image = cv2.bitwise_and(img, mask)
+    return masked_image
+
+
 def main():
     
     for i in list(range(4))[::-1]:

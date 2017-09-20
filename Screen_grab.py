@@ -1,3 +1,6 @@
+# GTA 5 AI Project
+# @author = amritansh
+
 import numpy as np
 from PIL import ImageGrab
 import cv2
