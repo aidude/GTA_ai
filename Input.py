@@ -11,13 +11,27 @@ import time
 import pyautogui
 from directkeys import PressKey, W, A, S, D
 
+
+
+def draw_lines(img, lines):
+    try:
+        for line in lines:
+            coords = line[0]
+            cv2.line(img, (coords[0],coords[1]), (coords[2],coords[3]), [255,255,255], 3)
+    except:
+pass
+
 def process_img(image):
     original_image = image
     # convert to gray
-    processed_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # edge detection
-    processed_img =  cv2.Canny(processed_img, threshold1 = 200, threshold2=300)
-    return processed_img
+    processed_image =  cv2.Canny(processed_image, threshold1 = 200, threshold2=300)
+
+    # Hough lines 
+    lines = cv2.HoughLinesP(processed_image, numpy.pi/180, 180, 20, 50)
+    draw_lines(processed_image, lines)
+    return processed_image
 
 
 def roi(image, vertices):
