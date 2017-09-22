@@ -132,7 +132,7 @@ def process_img(image):
         for coords in lines:
             coords = coords[0]
             try:
-                cv2.line(processed_img, (coords[0], coords[1]), (coords[2], coords[3]), [255,0,0], 3)
+                cv2.line(processed_image, (coords[0], coords[1]), (coords[2], coords[3]), [255,0,0], 3)
                 
                 
             except Exception as e:
@@ -140,7 +140,7 @@ def process_img(image):
     except Exception as e:
         pass
 
-    return processed_image, original_image
+    return processed_image
 
 
 def roi(image, vertices):
