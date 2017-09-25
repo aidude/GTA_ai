@@ -105,7 +105,7 @@ def draw_lanes(img, lines, color=[0, 255, 255], thickness=3):
         l1_x1, l1_y1, l1_x2, l1_y2 = average_lane(final_lanes[lane1_id])
         l2_x1, l2_y1, l2_x2, l2_y2 = average_lane(final_lanes[lane2_id])
 
-        return [l1_x1, l1_y1, l1_x2, l1_y2], [l2_x1, l2_y1, l2_x2, l2_y2]
+        return [l1_x1, l1_y1, l1_x2, l1_y2], [l2_x1, l2_y1, l2_x2, l2_y2], lane1_id, lane2_id
     except Exception as e:
         print(str(e))
 
@@ -121,8 +121,9 @@ def process_img(image):
     # Hough lines 
     lines = cv2.HoughLinesP(processed_image, 1,  np.pi/180, 180, np.array([]), 20, 15)
     draw_lines(processed_image, lines)
+
     try:
-        l1, l2 = draw_lanes(original_image,lines)
+        l1, l2, m1, m2 = draw_lanes(original_image,lines)
         cv2.line(original_image, (l1[0], l1[1]), (l1[2], l1[3]), [0,255,0], 30)
         cv2.line(original_image, (l2[0], l2[1]), (l2[2], l2[3]), [0,255,0], 30)
     except Exception as e:
@@ -140,7 +141,7 @@ def process_img(image):
     except Exception as e:
         pass
 
-    return processed_image
+    return processed_image, original_image, m1, m2
 
 
 def roi(image, vertices):
@@ -148,6 +149,33 @@ def roi(image, vertices):
     cv2.fillPoly(mask, vertices, 255)
     masked_image = cv2.bitwise_and(img, mask)
     return masked_image
+
+
+
+def straight():
+    PressKey(W)
+    ReleaseKey(A)
+    ReleaseKey(D)
+
+def left():
+    PressKey(A)
+    ReleaseKey(W)
+    ReleaseKey(D)
+    ReleaseKey(A)
+
+def right():
+    PressKey(D)
+    ReleaseKey(A)
+    ReleaseKey(W)
+    ReleaseKey(D)
+
+def slow_up():
+    ReleaseKey(W)
+    ReleaseKey(A)
+    ReleaseKey(D)
+
+def accelerate():
+    PressKey(W)
 
 
 def main():
@@ -163,9 +191,25 @@ def main():
         print('{} Frames per second'.format(1/(time.time()-last_time)))
         #print('Frame took {} seconds'.format(time.time()-last_time))
         last_time = time.time()
-        new_screen = process_img(screen)
-        cv2.imshow('window', new_screen)
-        #cv2.imshow('window',cv2.cvtColor(screen, cv2.COLOR_BGR2RGB))
+        try:
+            processed_image, original_image, m1, m2 = process_img(screen)
+        except Exception as e:
+            raise e
+        
+    
+        cv2.imshow('window_02',cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
+
+
+
+        if m1 < 0 and m2 < 0:
+            right()
+        elif m1 > 0  and m2 > 0:
+            left()
+        else:
+            straight()
+
+        cv2.imshow('window_01', processed_image)
+        
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
