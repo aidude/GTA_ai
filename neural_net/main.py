@@ -32,6 +32,10 @@ def main():
 
     last_time = time.time()
     while True:
+    	screen = screen_grab(region=(0,40,800,640))
+    	screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+    	screen = cv2.resize(80,64)
+    	
 
 
 
