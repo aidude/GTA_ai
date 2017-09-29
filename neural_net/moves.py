@@ -1,6 +1,7 @@
 # Locomotion moves for vehicles.
 @ author = amritansh
 
+from directkeys import PressKey, ReleaseKey, W, A, S, D
 
 
 def straight():
