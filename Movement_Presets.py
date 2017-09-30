@@ -1,11 +1,11 @@
 import pyautogui
 from directkeys import PressKey, ReleaseKey, W, A, S, D
 
-class Movement(object):
-    """docstring for Movement"""
-    def __init__(self, arg):
-        super Movement, self).__init__()
-        self.arg = arg
+# class Movement(object):
+#     """docstring for Movement"""
+#     def __init__(self, arg):
+#         super Movement, self).__init__()
+#         self.arg = arg
         
 
 def straight():
@@ -34,5 +34,5 @@ def accelerate():
     PressKey(W)
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
    
