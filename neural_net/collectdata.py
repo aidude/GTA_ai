@@ -70,10 +70,10 @@ def main(file_name, starting_value):
         if 'T' in keys:
             if paused:
                 paused = False
-                print('Unpaused!')
+                print('Unpaused')
                 time.sleep(1)
             else:
-                print('Pausing!')
+                print('Pausing')
                 paused = True
 		time.sleep(1)
 
