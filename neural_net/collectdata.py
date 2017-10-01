@@ -13,33 +13,43 @@ import os
 
 path = 'D:\GTA_project_data'
 
-file_name = 'training_data.npy' 
+
+starting_value = 1058
+
+while True:
+    file_name = 'training_data-{0}.npy'.format(starting_value)
+    if os.path.isfile(file_name):
+        print('File exists, push on!!', starting_value)
+        starting_value += 1
+    else:
+        print('File does not exist, starting fresh!', starting_value)
+break
 
 
-if os.path.isfile(file_name):
-	print('File Exists, Fetching data !')
-	training_data = list(np.load(file_name))
-else:
-	print('File does not exists, try again !')
+def main(file_name, starting_value):
 	training_data = []
-
-
-
-def main():
 	for i in list(range(4))[::-1]:
         print(i+1)
         time.sleep(1)
 
     last_time = time.time()
+    paused = False
+	print('STARTING!!!')
     while True:
-    	screen = screen_grab(region=(0,40,800,640))
-    	screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
-    	screen = cv2.resize(80,64)
-    	
+    	if not paused:
+	    	screen = screen_grab(region=(0,40,800,640))
+	    	# resize
+            screen = cv2.resize(screen, (80, 60))
+            # run a color convert
+            screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+            keys = key_check()
+            output = keys_to_output(keys)
+            training_data.append([screen,output])
+
 
 
 
 
 
 if __name__ == '__main__':
-main()
+	main(file_name, starting_value)

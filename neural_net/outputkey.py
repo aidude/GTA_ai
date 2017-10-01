@@ -17,7 +17,7 @@ key_map = {
     'default': [0, 0, 0, 0, 0, 0, 0, 0, 0],
 }
 def output_keys(keys):
-	output_array = [0,0,0]
+	key_map = [0,0,0]
 
 	if 'A' in keys:
 		output_array[0] = 1
@@ -25,7 +25,7 @@ def output_keys(keys):
 		output_array[2] = 1
 	else:
 		output_array[1] = 1
-	return output_array
+	return key_map
 
 def output_keys_1(keys):
 	""" Generate one hot encoding and tack them together
