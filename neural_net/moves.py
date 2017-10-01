@@ -1,5 +1,5 @@
 # Locomotion moves for vehicles.
-@ author = amritansh
+# @ author = amritansh
 
 from directkeys import PressKey, ReleaseKey, W, A, S, D
 
