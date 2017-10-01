@@ -6,7 +6,7 @@ import time
 import cv2
 import numpy as np 
 from Screen_grab import screen_grab
-from outputkeys import output_keys
+from outputkey import output_keys
 from getkeys import key_check
 
 import os
