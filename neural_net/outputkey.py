@@ -6,6 +6,8 @@ from directkeys import W, A, D, directkeys
 
 
 def output_keys(keys):
+	""" One hot encoding with just three keys. Further encoding for more keystrokes and their combinations.
+	"""
 	key_map = [0,0,0]
 
 	if 'A' in keys:

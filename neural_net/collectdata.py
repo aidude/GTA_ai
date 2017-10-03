@@ -8,7 +8,6 @@ import numpy as np
 from Screen_grab import screen_grab
 from outputkey import output_keys_1
 from getkeys import key_check
-
 import os
 
 path = 'D:\GTA_project_data'
@@ -58,7 +57,7 @@ def main(file_name, starting_value):
 
 
 	        if len(training_data) % 100 == 0:
-	        	print( len(training_data))
+	        	print(len(training_data))
 	        	if len(training_data) == 500:
 	        		np.save(file_name, training_data)
                     print('SAVED')
