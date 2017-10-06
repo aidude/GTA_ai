@@ -10,6 +10,7 @@ from outputkey import output_keys_1
 from getkeys import key_check
 import os
 
+# provide the path on the system
 path = 'D:\GTA_project_data'
 
 
