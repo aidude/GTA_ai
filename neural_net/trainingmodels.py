@@ -43,3 +43,22 @@ for epoch in range(EPOCHS):
             # full file info
             train_data = np.load(file_name)
 		print('training_data-{0}.npy'.format(i), len(train_data))
+
+		train = train_data[:-50]
+        test = train_data[-50:]
+
+        X = np.array([i[0] for i in train]).reshape(-1, WIDTH, HEIGHT, 3)
+        Y = [i[1] for i in train]
+
+        test_x = np.array([i[0] for i in test]).reshape(-1, WIDTH, HEIGHT, 3)
+        test_y = [i[1] for i in test]
+
+        model.fit({'input': X}, {'targets': Y}, n_epoch = 1, validation_set = ({'input': test_x}, {'targets': test_y}),
+            snapshot_step = 2500, show_metric = True, run_id = MODEL_NAME)
+
+        if count % 10 == 0:
+            print('SAVING MODEL!')
+            model.save(MODEL_NAME)
+
+    except Exception as e:
+        print(e)
