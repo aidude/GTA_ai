@@ -43,7 +43,8 @@ for epoch in range(EPOCHS):
             # full file info
             train_data = np.load(file_name)
 		print('training_data-{0}.npy'.format(i), len(train_data))
-
+ # always validating unique data:
+#       shuffle(train_data)
 		train = train_data[:-50]
         test = train_data[-50:]
 
