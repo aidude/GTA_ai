@@ -37,6 +37,13 @@ def main():
     	screen = cv2.resize(80,64)
     	
 
+        while(True):
+        if not paused:
+            screen = grab_screen(region = (0, 40, GAME_WIDTH, GAME_HEIGHT + 40))
+            screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+
+            last_time = time.time()
+            screen = cv2.resize(screen, (WIDTH,HEIGHT))
 
 
 
