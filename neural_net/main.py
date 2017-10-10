@@ -83,7 +83,11 @@ def main():
                 choice_picked = 'reverse+right'
             elif mode_choice == 8:
                 no_keys()
-            choice_picked = 'nokeys'
+                choice_picked = 'nokeys'
+            motion_log.append(delta_count)
+            motion_avg = round(mean(motion_log), 3)
+            print('loop took {0} seconds. Motion: {1}. Choice: {2}'.format(round(time.time() - last_time, 3), motion_avg, choice_picked))
+
 
 
 
