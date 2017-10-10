@@ -89,6 +89,17 @@ def main():
             print('loop took {0} seconds. Motion: {1}. Choice: {2}'.format(round(time.time() - last_time, 3), motion_avg, choice_picked))
 
 
+             # p pauses game and can get annoying.
+        if 'T' in keys:
+            if paused:
+                paused = False
+                time.sleep(1)
+            else:
+                paused = True
+                ReleaseKey(A)
+                ReleaseKey(W)
+                ReleaseKey(D)
+                time.sleep(1)
 
 
 
