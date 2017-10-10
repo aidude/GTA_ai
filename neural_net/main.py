@@ -45,6 +45,46 @@ def main():
             last_time = time.time()
             screen = cv2.resize(screen, (WIDTH,HEIGHT))
 
+            delta_count_last = motion_detection(t_minus, t_now, t_plus)
+
+            t_minus = t_now
+            t_now = t_plus
+            t_plus = screen
+            t_plus = cv2.blur(t_plus, (4, 4))
+
+            prediction = model.predict([screen.reshape(WIDTH,HEIGHT, 3)])[0]
+            prediction = np.array(prediction) * np.array([4.5, 0.1, 0.1, 0.1, 1.8, 1.8, 0.5, 0.5, 0.2])
+
+            mode_choice = np.argmax(prediction)
+
+            if mode_choice == 0:
+                straight()
+                choice_picked = 'straight'
+            elif mode_choice == 1:
+                reverse()
+                choice_picked = 'reverse'
+            elif mode_choice == 2:
+                left()
+                choice_picked = 'left'
+            elif mode_choice == 3:
+                right()
+                choice_picked = 'right'
+            elif mode_choice == 4:
+                forward_left()
+                choice_picked = 'forward+left'
+            elif mode_choice == 5:
+                forward_right()
+                choice_picked = 'forward+right'
+            elif mode_choice == 6:
+                reverse_left()
+                choice_picked = 'reverse+left'
+            elif mode_choice == 7:
+                reverse_right()
+                choice_picked = 'reverse+right'
+            elif mode_choice == 8:
+                no_keys()
+            choice_picked = 'nokeys'
+
 
 
 
