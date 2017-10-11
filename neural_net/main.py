@@ -88,6 +88,45 @@ def main():
         motion_avg = round(mean(motion_log), 3)
         print('loop took {0} seconds. Motion: {1}. Choice: {2}'.format(round(time.time() - last_time, 3), motion_avg, choice_picked))
 
+        
+        if motion_avg < motion_req and len(motion_log) >= log_len:
+                print('WERE PROBABLY STUCK FFS, initiating some evasive maneuvers.')
+
+                # 0 = reverse straight, turn left out
+                # 1 = reverse straight, turn right out
+                # 2 = reverse left, turn right out
+                # 3 = reverse right, turn left out
+
+                quick_choice = random.randrange(0, 4)
+
+                if quick_choice == 0:
+                    reverse()
+                    time.sleep(random.uniform(1, 2))
+                    forward_left()
+                    time.sleep(random.uniform(1, 2))
+
+                elif quick_choice == 1:
+                    reverse()
+                    time.sleep(random.uniform(1, 2))
+                    forward_right()
+                    time.sleep(random.uniform(1, 2))
+
+                elif quick_choice == 2:
+                    reverse_left()
+                    time.sleep(random.uniform(1, 2))
+                    forward_right()
+                    time.sleep(random.uniform(1, 2))
+
+                elif quick_choice == 3:
+                    reverse_right()
+                    time.sleep(random.uniform(1, 2))
+                    forward_left()
+                    time.sleep(random.uniform(1, 2))
+
+                for i in range(log_len - 2):
+                    del motion_log[0]
+
+keys = key_check()
 
          # p pauses game and can get annoying.
     if 'T' in keys:
