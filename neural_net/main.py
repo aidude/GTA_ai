@@ -52,6 +52,7 @@ def main():
         t_plus = screen
         t_plus = cv2.blur(t_plus, (4, 4))
 
+        # prediction based on training
         prediction = model.predict([screen.reshape(WIDTH,HEIGHT, 3)])[0]
         prediction = np.array(prediction) * np.array([4.5, 0.1, 0.1, 0.1, 1.8, 1.8, 0.5, 0.5, 0.2])
 
@@ -84,6 +85,8 @@ def main():
         elif mode_choice == 8:
             no_keys()
             choice_picked = 'nokeys'
+
+        # motion log generate and print
         motion_log.append(delta_count)
         motion_avg = round(mean(motion_log), 3)
         print('loop took {0} seconds. Motion: {1}. Choice: {2}'.format(round(time.time() - last_time, 3), motion_avg, choice_picked))
